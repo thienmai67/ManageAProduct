@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Reflection;
 using System.Text;
 
 namespace ManageAProduct
@@ -18,7 +19,8 @@ namespace ManageAProduct
             //Console.WriteLine();
             //advancedCondition();  //Method
             //Console.WriteLine();
-            productDiscount();      //Method
+            productDiscount();    //Method
+            //CheckProduct();
         }
         static void manageProduct()
         {
@@ -92,21 +94,76 @@ namespace ManageAProduct
         }
         static void productDiscount() //Giảm giá sản phẩm
         {
-            Console.Write("Nhập giá sản phẩm: ");
-            double price = double.Parse(Console.ReadLine());
-            Console.Write("Nhập số lượng sản phẩm: ");
-            int quantity = int.Parse(Console.ReadLine());
-            double discount = 0.1;
+            //Khai báo
+            decimal price;
+            int quantity;
+            decimal discountCode = 0.1m;
 
-            if (price >= 1000000 && quantity >= 10)
+            Console.Write("Nhập giá: ");
+            bool isPrice = decimal.TryParse(Console.ReadLine(), out price);
+            Console.Write("Nhập số lượng: ");
+            bool isQuantity = int.TryParse(Console.ReadLine(), out quantity);
+
+            if(isPrice && isQuantity)
             {
-                double finalPrice = price - (price * discount);
-                Console.WriteLine($"Sản phẩm được giảm 10%\nGiá sau khi giảm: {finalPrice}");
+                if(price >= 1000000 && quantity >= 10)
+                {
+                    decimal finalPrice = price - (price * discountCode);
+                    Console.WriteLine("Sản phẩm được giảm giá!");
+                    Console.WriteLine($"Giá sau khi giảm: {finalPrice}");
+                }
+                else if(price <= 0)
+                {
+                    Console.WriteLine("Giá không tồn tại");
+                }
+                else if(quantity <= 0)
+                {
+                    Console.WriteLine("Số lượng không tồn tại!");
+                }    
+                else
+                {
+                    Console.WriteLine("Sản phẩm không được giảm giá!");
+                    Console.WriteLine($"Tổng: {price}");
+                }
             }
             else
             {
-                Console.WriteLine("Không giảm giá!");
+                Console.WriteLine("Dữ liệu nhập không hợp lệ!");
             }
+            Console.ReadKey();
+        }
+        static void CheckProduct()
+        {
+            // Khai báo biến
+            decimal price;  
+            int quantity;
+
+            Console.Write("Nhập giá: ");
+            bool isPrice = decimal.TryParse(Console.ReadLine(), out price);
+            Console.Write("Nhập số lượng: ");
+            bool isQuantity = int.TryParse(Console.ReadLine(), out quantity);
+            if(isPrice && isQuantity)
+            {
+                if(price > 0 && quantity > 0)
+                {
+                    Console.WriteLine("Sản phẩm hợp lệ!");
+                    Console.WriteLine($"Giá sản phẩm là: {price}");
+                    Console.WriteLine($"Số lượng sản phẩm: {quantity}");
+                }
+                else if(price <= 0)
+                {
+                    Console.WriteLine("Giá không hợp lệ!");
+                }
+                else if(quantity <= 0)
+                {
+                    Console.WriteLine("Số lượng không hợp lệ!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Sản phẩm không tồn tại!");
+            }
+            Console.ReadKey();
         }
     }
 }
