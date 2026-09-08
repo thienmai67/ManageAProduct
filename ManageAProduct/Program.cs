@@ -10,16 +10,17 @@ namespace ManageAProduct
         {
             Console.OutputEncoding = Encoding.UTF8;
             //manageProduct();      //Method
-            //Console.WriteLine();
+        
             //advancedSection();    //Method
-            //Console.WriteLine();
+          
             //SayHello("Thiện");    //Method
-            //Console.WriteLine();
+          
             //Condition();          //Method
-            //Console.WriteLine();
+            
             //advancedCondition();  //Method
-            //Console.WriteLine();
+ 
             productDiscount();    //Method
+
             //CheckProduct();
         }
         static void manageProduct()
